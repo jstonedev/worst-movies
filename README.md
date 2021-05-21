@@ -1,7 +1,5 @@
 # Worst Movies of All Time
 
-This simple React application lists the worst movies of all time according to IMBD
-
 ## To get started
 
 In the project directory, run:
