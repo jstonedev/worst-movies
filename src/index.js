@@ -1,17 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "overmind-react";
+import { createOvermind } from "overmind";
+import { config } from "./overmind";
+import { BrowserRouter, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import normalize from "normalize.css";
+import Home from "./pages/Home";
+
+const state = createOvermind(config);
+
+const GlobalStyle = createGlobalStyle`
+  ${normalize}
+  body {
+    font-family: "Inter", sans-serif;
+    background: #2D3047;
+    color: #FEFCFB;
+  }
+  a {
+    color: #fefcfb;
+    font-weight: bold; 
+    text-decoration: none;
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<Provider value={state}>
+		<GlobalStyle />
+		<BrowserRouter>
+			<Route>
+				<Home path="/" />
+			</Route>
+		</BrowserRouter>
+	</Provider>,
+	document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
